@@ -35,6 +35,9 @@ typedef struct {
 
 cpu_t* cpu_check(cpu_t *cpus)
 {
+    if (!cpus) {
+        return NULL;
+    }
     int fd = open("/proc/stat", O_RDONLY);
     if (fd < 0) {
         perror("Failed to open /proc/stat");
@@ -52,6 +55,9 @@ cpu_t* cpu_check(cpu_t *cpus)
 
 static void print_cpu(cpu_t* cpu1, cpu_t* cpu2)
 {
+    if (!cpu1 || !cpu2) {
+        return;
+    }
     unsigned long jiff_0 = cpu1->user
                          + cpu1->sys
                          + cpu1->nice
